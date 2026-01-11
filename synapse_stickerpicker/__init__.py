@@ -14,8 +14,10 @@ class AppendStickerPickerData:
                 "type": "m.stickerpicker",
                 "url": "",
                 "name": "Stickerpicker",
+                "creatorUserId": "",
                 "data": {}
             },
+            "sender": "",
             "state_key": "stickerpicker",
             "type": "m.widget",
             "id": "stickerpicker"
@@ -32,4 +34,8 @@ class AppendStickerPickerData:
         return config
 
     async def on_user_registration(self, user: str) -> None:
-        await self._store.add_account_data_for_user(user, 'm.widgets', self.stickerpicker_data)
+        data = self.stickerpicker_data.copy()
+        data['stickerpicker']['content'] = data['stickerpicker']['content'].copy()
+        data['stickerpicker']['content']['creatorUserId'] = user
+        data['stickerpicker']['sender'] = user
+        await self._store.add_account_data_for_user(user, 'm.widgets', data)
