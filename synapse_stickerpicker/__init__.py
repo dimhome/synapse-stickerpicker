@@ -2,6 +2,7 @@
 __author__ = 'mizhgun@gmail.com'
 
 import typing
+import copy
 
 if typing.TYPE_CHECKING:
     from synapse.module_api import ModuleApi
@@ -33,4 +34,6 @@ class AppendStickerPickerData:
         return config
 
     async def on_user_registration(self, user: str) -> None:
-        await self._store.add_account_data_for_user(user, 'm.widgets', self.stickerpicker_data)
+        stickerpicker_data = copy.deepcopy(self.stickerpicker_data)
+        stickerpicker_data['stickerpicker']['content']['creatorUserId'] = user
+        await self._store.add_account_data_for_user(user, 'm.widgets', stickerpicker_data)
