@@ -32,6 +32,5 @@ class AppendStickerPickerData:
     def parse_config(config):
         return config
 
-    async def on_user_registration(self, user_id: str) -> None:
-        self.stickerpicker_data['stickerpicker']['content']['creatorUserId'] = user_id
-        await self._store.add_account_data_for_user(user_id, 'm.widgets', self.stickerpicker_data)
+    async def on_user_registration(self, user: str) -> None:
+        await self._store.add_account_data_for_user(user, 'm.widgets', self.stickerpicker_data)
