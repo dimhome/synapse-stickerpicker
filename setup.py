@@ -4,7 +4,7 @@ setup(
     name='synapse-stickerpicker',
     version='0.1.0',
     packages=find_packages(exclude=('tests', 'tests.*')),
-    url='http://github.com/mizhgun/synapse-stickerpicker',
+    url='http://github.com/dimhome/synapse-stickerpicker',
     license='MIT',
     author='MiZHGUN',
     author_email='mizhgun@gmail.com',
